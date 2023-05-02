@@ -25,4 +25,3 @@ pluginManagement {
 }
 
 rootProject.name = "tetris-mp"
-

@@ -17,7 +17,7 @@ buildscript {
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
-    id("com.android.application") version "8.0.0"
+    id("com.android.application") version "8.0.1"
 }
 
 version = "1.0"
@@ -33,8 +33,7 @@ kotlin {
 
     targets.withType<KotlinNativeTarget> {
         binaries.all {
-            // TODO: the current compose binary surprises LLVM, so disable checks for now.
-            freeCompilerArgs += "-Xdisable-phases=VerifyBitcode"
+            freeCompilerArgs = freeCompilerArgs + "-Xdisable-phases=VerifyBitcode"
         }
     }
 
@@ -125,7 +124,7 @@ android {
     }
 
     signingConfigs {
-        // todo
+        // todo loitp keystore
     }
 
     buildTypes {
@@ -162,11 +161,10 @@ compose {
             nativeDistributions {
                 outputBaseDir.set(projectDir.resolve("artifacts/desktop"))
                 targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-                packageName = "TetrisMP"
+                packageName = "Tetris"
                 packageVersion = "1.0.0"
 
                 windows {
-                    // see https://wixtoolset.org/documentation/manual/v3/howtos/general/generate_guids.html
                     upgradeUuid = "18159995-d967-4CD2-8885-77BFA97CFA9F"
                 }
             }
@@ -174,10 +172,6 @@ compose {
         }
     }
 
-/*    android {
-        useAndroidX = true
-        androidxVersion = "1.2.0"
-    }*/
     experimental {
         web.application { }
     }
@@ -196,8 +190,6 @@ afterEvaluate {
     }
 }
 
-
-// TODO: remove when https://youtrack.jetbrains.com/issue/KT-50778 fixed
 project.tasks.withType(org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile::class.java).configureEach {
     kotlinOptions.freeCompilerArgs += listOf(
         "-Xir-dce-runtime-diagnostic=log"
