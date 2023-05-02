@@ -9,7 +9,7 @@ actual suspend fun platformTypography(): Typography = Typography(
     defaultFontFamily = FontFamily(
         Font(
             identity = "roboto",
-            data = loadBytesFromPath("Roboto-Regular.ttf")
+            data = loadBytesFromPath("font.ttf")
         )
     )
 )
