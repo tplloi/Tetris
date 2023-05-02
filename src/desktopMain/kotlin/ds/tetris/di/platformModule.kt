@@ -1,7 +1,3 @@
-/*
- * © 2022 Deviant Studio
- */
-
 package ds.tetris.di
 
 import org.koin.core.module.Module

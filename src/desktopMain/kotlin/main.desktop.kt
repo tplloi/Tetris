@@ -1,4 +1,3 @@
-import androidx.compose.ui.text.platform.Font
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowState
@@ -14,12 +13,12 @@ fun main() {
     val game: Game = get().get()
     singleWindowApplication(
         title = "Tetris MP",
-        state = WindowState(size = DpSize(450.dp, 800.dp))
+        state = WindowState(
+            size = DpSize(450.dp, 800.dp)
+        )
     ) {
         TetrisTheme {
             TetrisGame(game)
         }
     }
 }
-
-
