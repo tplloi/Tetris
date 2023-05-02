@@ -12,13 +12,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 enum class Clip(vararg val res: String) {
-    START("start"),
-    GAME_OVER("game_over"),
-    PAUSE("rotate"),
-    MOVE("move1", "move2", "move3", "move4"),
-    ROTATE("rotate"),
-    WIPE("wipe1", "wipe2", "wipe3", "wipe4"),
-    LEVEL_UP("level_up");
+    START("s_start"),
+    GAME_OVER("s_game_over"),
+    PAUSE("s_rotate"),
+    MOVE("s_move1", "s_move2", "s_move3", "s_move4"),
+    ROTATE("s_rotate"),
+    WIPE("s_wipe1", "s_wipe2", "s_wipe3", "s_wipe4"),
+    LEVEL_UP("s_level_up");
 
 }
 
