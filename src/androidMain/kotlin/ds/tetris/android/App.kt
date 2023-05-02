@@ -18,6 +18,11 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        setupApp()
+    }
+
+    private fun setupApp() {
         startKoin {
             androidContext(this@App)
             modules(gameModule, platformModule)
