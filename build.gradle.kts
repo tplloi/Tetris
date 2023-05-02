@@ -17,7 +17,7 @@ buildscript {
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
-    id("com.android.application") version "7.4.1"
+    id("com.android.application") version "8.0.0"
 }
 
 version = "1.0"
