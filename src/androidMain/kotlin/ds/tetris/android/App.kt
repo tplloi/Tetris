@@ -13,6 +13,7 @@ import org.koin.core.context.startKoin
 //TODO share app
 //TODO more app
 //TODO policy
+//TODO leak canary
 class App : Application() {
 
     override fun onCreate() {
