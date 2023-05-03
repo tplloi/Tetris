@@ -1,7 +1,3 @@
-/*
- * © 2022 Deviant Studio
- */
-
 package ds.tetris.ui
 
 import androidx.compose.animation.core.*
@@ -51,7 +47,10 @@ fun Board(
     animationEnabled: Boolean,
     modifier: Modifier = Modifier,
 ) {
-    Box(modifier.aspectRatio(boardSize.width / boardSize.height.toFloat()), contentAlignment = Alignment.Center) {
+    Box(
+        modifier.aspectRatio(boardSize.width / boardSize.height.toFloat()),
+        contentAlignment = Alignment.Center
+    ) {
         var phase: AnimationPhase by remember { mutableStateOf(AnimationPhase.IDLE) }
 
         val wipeColorAnimated: Int by animateIntAsState(
@@ -75,7 +74,10 @@ fun Board(
 
         val rememberMainBody by rememberUpdatedState(mainBody)
         var previousFigure by remember(rotationPivot, animationEnabled) { mutableStateOf(mainBody) }
-        val direction = remember(mainBody, previousFigure) { mainBody.getPosition() - previousFigure.getPosition() }
+        val direction = remember(
+            mainBody,
+            previousFigure
+        ) { mainBody.getPosition() - previousFigure.getPosition() }
         var transitionRunning by remember { mutableStateOf(false) }
 
         val animationKey by produceState(0, direction) {
@@ -139,7 +141,10 @@ fun Board(
                 if (!gameOver) {
                     drawBricks(boardBricks + ghostBody, brickSize)
                 } else {
-                    drawBricks(boardBricks.map { it.copy(style = PaintStyle.Fill(Color.Red)) }, brickSize)
+                    drawBricks(
+                        boardBricks.map { it.copy(style = PaintStyle.Fill(Color.Red)) },
+                        brickSize
+                    )
                 }
             }
 
@@ -163,10 +168,16 @@ fun Board(
                 AnimationPhase.WIPING -> {
                     wipedLines.forEach { y ->
                         (0 until boardSize.width)
-                            .map { x -> Brick(IntOffset(x, y), PaintStyle.Fill(spectrumColors[wipeColorAnimated])) }
+                            .map { x ->
+                                Brick(
+                                    IntOffset(x, y),
+                                    PaintStyle.Fill(spectrumColors[wipeColorAnimated])
+                                )
+                            }
                             .let { drawBricks(it, brickSize) }
                     }
                 }
+
                 AnimationPhase.SHIFTING -> {
                     val groupedBricks = (boardBricks + ghostBody).groupBy { b ->
                         wipedLines.firstOrNull { b.offset.y < it /*&& !b.isFigure*/ } ?: -1
@@ -192,6 +203,7 @@ fun Board(
                     }
 
                 }
+
                 AnimationPhase.IDLE -> {
                     if (wipedLines.isNotEmpty()) {
                         phase = AnimationPhase.WIPING
@@ -203,7 +215,12 @@ fun Board(
 
         if (gameOver) {
             Surface(color = Color.White, shape = MaterialTheme.shapes.medium, elevation = 8.dp) {
-                Text("GAME OVER", fontSize = 30.sp, color = Color.Black, modifier = Modifier.padding(16.dp))
+                Text(
+                    "GAME OVER",
+                    fontSize = 30.sp,
+                    color = Color.Black,
+                    modifier = Modifier.padding(16.dp)
+                )
             }
         }
     }
@@ -228,4 +245,5 @@ fun DrawScope.drawBricks(bricks: List<Brick>, brickSize: Float) {
     }
 }
 
-private fun List<Brick>.getPosition(): IntOffset = IntOffset(minOfOrNull { it.offset.x } ?: 0, minOfOrNull { it.offset.y } ?: 0)
+private fun List<Brick>.getPosition(): IntOffset =
+    IntOffset(minOfOrNull { it.offset.x } ?: 0, minOfOrNull { it.offset.y } ?: 0)

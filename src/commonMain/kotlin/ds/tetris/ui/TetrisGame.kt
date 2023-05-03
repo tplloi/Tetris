@@ -39,7 +39,6 @@ fun TetrisGame(game: Game) {
         onToggleAnimation = game::toggleAnimation
     )
 
-
 }
 
 @Composable
@@ -64,7 +63,13 @@ fun TetrisScreen(
             .focusRequester(focusRequester)
             .onPreviewKeyEvent {
                 // doesn't work in browser
-                if (it.key in listOf(Key.DirectionLeft, Key.DirectionRight, Key.DirectionUp, Key.DirectionDown)) {
+                if (it.key in listOf(
+                        Key.DirectionLeft,
+                        Key.DirectionRight,
+                        Key.DirectionUp,
+                        Key.DirectionDown
+                    )
+                ) {
                     //log.v("${it.key} ${it.type} ${it.utf16CodePoint} ${it.nativeKeyEvent}")
                     when (it.type) {
                         KeyEventType.KeyDown -> {
@@ -75,6 +80,7 @@ fun TetrisScreen(
                                 Key.DirectionDown -> onDownPress()
                             }
                         }
+
                         KeyEventType.KeyUp -> {
                             onKeyRelease()
                         }
@@ -103,7 +109,10 @@ fun TetrisScreen(
                     Modifier.weight(1f)
                 )
 
-                Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.requiredWidth(120.dp)) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.requiredWidth(120.dp)
+                ) {
                     NextFigure(state.next)
 
                     Button(
@@ -143,14 +152,32 @@ fun TetrisScreen(
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                ControlButton(Icons.Default.KeyboardArrowLeft, onLeftPress, onKeyRelease, Modifier.weight(1f))
+                ControlButton(
+                    Icons.Default.KeyboardArrowLeft,
+                    onLeftPress,
+                    onKeyRelease,
+                    Modifier.weight(1f)
+                )
 
-                Column(verticalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.weight(1f)) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.weight(1f)
+                ) {
                     ControlButton(Icons.Default.KeyboardArrowUp, onUpPress, {}, Modifier.weight(1f))
-                    ControlButton(Icons.Default.KeyboardArrowDown, onDownPress, onKeyRelease, Modifier.weight(1f))
+                    ControlButton(
+                        Icons.Default.KeyboardArrowDown,
+                        onDownPress,
+                        onKeyRelease,
+                        Modifier.weight(1f)
+                    )
                 }
 
-                ControlButton(Icons.Default.KeyboardArrowRight, onRightPress, onKeyRelease, Modifier.weight(1f))
+                ControlButton(
+                    Icons.Default.KeyboardArrowRight,
+                    onRightPress,
+                    onKeyRelease,
+                    Modifier.weight(1f)
+                )
             }
         }
     }
@@ -177,5 +204,3 @@ fun ControlButton(
         Icon(icon, null)
     }
 }
-
-

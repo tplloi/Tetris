@@ -1,7 +1,3 @@
-/*
- * © 2017-2022 Deviant Studio
- */
-
 package ds.tetris.game.figures
 
 val figures = listOf(

@@ -1,7 +1,3 @@
-/*
- * © 2017-2022 Deviant Studio
- */
-
 package ds.tetris.game.figures
 
 import androidx.compose.ui.unit.IntOffset
@@ -71,7 +67,8 @@ class BitMatrixBuilder {
 
 class BoardMatrix(override val array: Array<Array<PaintStyle?>>) : Matrix<PaintStyle?> {
     companion object {
-        operator fun invoke(width: Int, height: Int): BoardMatrix = BoardMatrix(Array(height) { Array(width) { null } })
+        operator fun invoke(width: Int, height: Int): BoardMatrix =
+            BoardMatrix(Array(height) { Array(width) { null } })
     }
 
 }

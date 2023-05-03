@@ -1,26 +1,27 @@
-/*
- * © 2017-2022 Deviant Studio
- */
-
 package ds.tetris.game
 
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
-import ds.tetris.game.Direction.*
+import ds.tetris.game.Direction.DOWN
+import ds.tetris.game.Direction.LEFT
+import ds.tetris.game.Direction.RIGHT
+import ds.tetris.game.Direction.UP
 import ds.tetris.game.figures.Figure
 import ds.tetris.game.figures.FigureFactory
 import ds.tetris.game.job.KeysProducer
 import io.github.aakira.napier.Napier
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.selects.select
-import kotlin.random.Random
 
 private const val BASE_DELAY = 800L
 
@@ -125,9 +126,11 @@ class Game(
             GameState.State.PAUSED -> {
                 state.update { it.copy(state = GameState.State.STARTED) }
             }
+
             GameState.State.STARTED -> {
                 state.update { it.copy(state = GameState.State.PAUSED) }
             }
+
             else -> {}
         }
     }
@@ -248,7 +251,8 @@ class Game(
             !nextPoint.outOfArea() && board.matrix[nextPoint] == null
         }
 
-    private fun IntOffset.outOfArea(): Boolean = x >= board.width || x < 0 || y >= board.height || y < 0
+    private fun IntOffset.outOfArea(): Boolean =
+        x >= board.width || x < 0 || y >= board.height || y < 0
 
     private fun Figure.moveToStart() {
         this.offset = IntOffset((board.width - this.matrix.width) / 2, 0)

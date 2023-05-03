@@ -1,7 +1,3 @@
-/*
- * © 2017-2022 Deviant Studio
- */
-
 package ds.tetris.game.figures
 
 import androidx.compose.ui.graphics.Color
@@ -28,7 +24,10 @@ internal data class Figure(
 
     fun rotate(): Figure {
         val newMatrix = matrix.rotate()
-        val newOffset = IntOffset((matrix.width - newMatrix.width) / 2, (matrix.height - newMatrix.height) / 2) + offset
+        val newOffset = IntOffset(
+            (matrix.width - newMatrix.width) / 2,
+            (matrix.height - newMatrix.height) / 2
+        ) + offset
         return copy(
             matrix = newMatrix,
             offset = newOffset
@@ -50,7 +49,13 @@ internal data class Figure(
     }
 
     val allBricks: List<Brick>
-        get() = getPoints().map { Brick(it, PaintStyle.Fill(color), true) } + getGhostPoints().map { Brick(it, PaintStyle.Stroke(color)) }
+        get() = getPoints().map {
+            Brick(
+                it,
+                PaintStyle.Fill(color),
+                true
+            )
+        } + getGhostPoints().map { Brick(it, PaintStyle.Stroke(color)) }
 }
 
 internal object FigureFactory {

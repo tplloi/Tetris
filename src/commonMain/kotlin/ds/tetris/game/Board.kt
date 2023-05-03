@@ -1,7 +1,3 @@
-/*
- * © 2017-2022 Deviant Studio
- */
-
 package ds.tetris.game
 
 import androidx.compose.ui.unit.IntOffset
@@ -32,7 +28,6 @@ internal class Board(val width: Int = AREA_WIDTH, val height: Int = AREA_HEIGHT)
         .map { it.first }
         .toSet()
 
-
     fun clear() {
         matrix = BoardMatrix(width, height)
     }
@@ -46,6 +41,5 @@ internal class Board(val width: Int = AREA_WIDTH, val height: Int = AREA_HEIGHT)
         }
         matrix = BoardMatrix(newMatrix.toTypedArray())
     }
-
 
 }

@@ -1,7 +1,3 @@
-/*
- * © 2022 Deviant Studio
- */
-
 package ds.tetris.game.job
 
 import ds.tetris.game.Direction
@@ -49,6 +45,5 @@ class KeysProducer(override val coroutineContext: CoroutineContext) : CoroutineS
 
         }
     }
-
 
 }

@@ -1,7 +1,3 @@
-/*
- * © 2017-2022 Deviant Studio
- */
-
 package ds.tetris.game
 
 import com.soywiz.korau.sound.Sound
@@ -19,9 +15,7 @@ enum class Clip(vararg val res: String) {
     ROTATE("s_rotate"),
     WIPE("s_wipe1", "s_wipe2", "s_wipe3", "s_wipe4"),
     LEVEL_UP("s_level_up");
-
 }
-
 
 open class Soundtrack(scope: CoroutineScope) : CoroutineScope by scope {
 
@@ -67,4 +61,3 @@ open class Soundtrack(scope: CoroutineScope) : CoroutineScope by scope {
     }
 
 }
-

@@ -1,7 +1,3 @@
-/*
- * © 2022 Deviant Studio
- */
-
 package ds.tetris.game
 
 import androidx.compose.ui.geometry.Offset
